@@ -41,7 +41,25 @@ export const ENEMY_BASE_STATS = {
     heatDefence: 0,
 }
 
+// inilize player stat that require enemy attributes
+export function init(player, enemy){
+    // player and enemy must have all attribute required
+    player.accuracy = player.turning_speed/(2*enemy.speed);
+    enemy.accuracy = enemy.turning_speed/(2*player.speed);
+    player.DPH = (player.kineticDamage - enemy.kineticDefense) + 
+                    (player.electronicDamage - enemy.electronicDefense) +
+                    (player.heatDamage - enemy.heatDefence); 
+    enemy.DPH = (enemy.kineticDamage - player.kineticDefense) + 
+                    (enemy.electronicDamage - player.electronicDefense) +
+                    (enemy.heatDamage - player.heatDefence); 
+    player.missRate = 1 - enemy.accuracy;
+    enemy.missRate = 1 - player.accuracy;
+                    
+
+}
+
 // This adds to a, so it should only be used on a fresh object
+// todo
 export function combineStats(a, b) {
 	for (let [statId, value] of Object.entries(b)) {
 		if (statId == "attackSpeed" || statId == "damageType") {

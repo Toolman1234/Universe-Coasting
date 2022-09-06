@@ -42,7 +42,7 @@ export const ENEMY_BASE_STATS = {
 }
 
 // inilize player stat that require enemy attributes
-export function init(player, enemy){
+export function initStat(player, enemy){
     // player and enemy must have all attribute required
     player.accuracy = player.turning_speed/(2*enemy.speed);
     enemy.accuracy = enemy.turning_speed/(2*player.speed);
@@ -53,9 +53,7 @@ export function init(player, enemy){
                     (enemy.electronicDamage - player.electronicDefense) +
                     (enemy.heatDamage - player.heatDefence); 
     player.missRate = 1 - enemy.accuracy;
-    enemy.missRate = 1 - player.accuracy;
-                    
-
+    enemy.missRate = 1 - player.accuracy;   
 }
 
 // This adds to a, so it should only be used on a fresh object
@@ -82,6 +80,8 @@ export function getBasedStats(stats, mobType) {
 	return newStats;
 }
 
+// not sure what are those
+/*
 export function calcRobustness(stats, mobType) {
 	stats = getBasedStats(stats, mobType);
 
@@ -128,3 +128,4 @@ export function fixProtection(stats) {
 	}
 	return stats;
 }
+*/
